@@ -1,0 +1,55 @@
+const modelData = require('../data/models.json');
+const {
+  GraphQLObjectType,
+  GraphQLList,
+  GraphQLInt,
+  GraphQLFloat,
+  GraphQLString,
+} = require('graphql');
+
+const ModelType = new GraphQLObjectType({
+  name: 'ModelType',
+  description: 'Car Models',
+  fields: () => ({
+    id: { type: GraphQLInt },
+    makeId: { type: GraphQLInt },
+    name: { type: GraphQLString },
+    price: { type: GraphQLFloat },
+    imageUrl: { type: GraphQLString },
+  })
+});
+
+const models = {
+  type: GraphQLList(ModelType),
+  args: {
+    makeId: { type: GraphQLInt }
+  },
+  resolve: (root, args) => {
+    const modelListFields = m => ({ id: m.id, name: m.name, makeId: m.makeId })
+
+    if (args.makeId) {
+      const condition = model => model.makeId === args.makeId;
+
+      return modelData
+        .filter(condition)
+        .map(modelListFields);
+    }
+
+    return modelData.map(modelListFields);
+  }
+}
+
+const model = {
+  type: ModelType,
+  args: {
+    id: { type: GraphQLInt }
+  },
+  resolve: (root, args) => {
+    if (args.id) {
+      return modelData.find(model => model.id === args.id);
+    }
+    throw new Error("id is mandatory argument to access a specfic model");
+  }
+};
+
+module.exports = { models, model };
