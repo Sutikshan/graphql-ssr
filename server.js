@@ -418,11 +418,20 @@ class App extends _react.Component {
         null,
         "Car of the Week"
       ),
-      _react2.default.createElement("img", { className: "car-image", src: this.props.carOfTheWeek.imageUrl }),
       _react2.default.createElement(
         "div",
-        { className: "review-text" },
-        this.props.carOfTheWeek.review
+        { className: "home-page" },
+        _react2.default.createElement("img", { className: "car-image", src: this.props.carOfTheWeek.imageUrl }),
+        _react2.default.createElement(
+          "div",
+          { className: "review-text" },
+          this.props.carOfTheWeek.review
+        ),
+        _react2.default.createElement(
+          "button",
+          { className: "search-button" },
+          "Search Catalog"
+        )
       )
     );
   }

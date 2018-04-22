@@ -12,6 +12,13 @@ h4 {
   color: #333;
 }
 
+.home-page {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
 .car-image {
   margin-top: 2em;
 }
@@ -20,4 +27,11 @@ h4 {
   max-width: 60em;
   margin-top: 2em;
   margin-left: 2em;
+  font-size: 1.25em;
+}
+
+.search-button {
+  height: 3em;
+  width: 9em;
+  font-size: 1.25em;
 }
