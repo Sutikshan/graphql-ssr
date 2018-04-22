@@ -4,6 +4,10 @@ var nodeExternals = require("webpack-node-externals");
 
 var browserConfig = {
   entry: "./src/browser/index.js",
+  resolve: {
+    extensions: [".js", ".jsx"],
+    modules: [path.resolve(__dirname, "./src/browser"), "node_modules"]
+  },
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "bundle.js",

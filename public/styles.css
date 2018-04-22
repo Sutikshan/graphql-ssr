@@ -12,7 +12,7 @@ h4 {
   color: #333;
 }
 
-.home-page {
+.detail-page {
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -33,5 +33,44 @@ h4 {
 .search-button {
   height: 3em;
   width: 9em;
+  font-size: 1.25em;
+  cursor: pointer;
+  color: white;
+  background-color: #2f4f4f;
+  border-radius: 1em;
+}
+
+.search-container {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-between;
+  width: 20em;
+  height: 10em;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: silver;
+}
+
+select {
+  width: 10em;
+  outline: 0;
+  overflow: hidden;
+  height: 30px;
+  background: #2c343c;
+  color: white;
+  border: #2c343c;
+  padding: 5px 3px 5px 10px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 10px;
+  font-size: 1.25em;
+}
+
+select option {
+  border: 1px solid #000;
+  background: #010;
   font-size: 1.25em;
 }

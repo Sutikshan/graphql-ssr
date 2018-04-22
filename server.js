@@ -115,8 +115,7 @@ const models = {
 
       return _models2.default.filter(condition).map(modelListFields);
     }
-
-    return _models2.default.map(modelListFields);
+    return [];
   }
 };
 
@@ -143,7 +142,7 @@ exports.default = { models, model, modelFields, modelResolver };
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(__dirname) {
+
 
 var _express = __webpack_require__(3);
 
@@ -161,24 +160,29 @@ var _cors = __webpack_require__(11);
 
 var _cors2 = _interopRequireDefault(_cors);
 
+var _path = __webpack_require__(12);
+
+var _path2 = _interopRequireDefault(_path);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 const app = (0, _express2.default)();
+
 app.use((0, _cors2.default)());
 app.use("/graphql", (0, _expressGraphql2.default)({
   schema: _schema2.default,
   graphiql: true
 }));
+
 app.use(_express2.default.static("public"));
 
-app.get("/", function (request, response) {
-  response.sendFile(__dirname + "/public/index.html");
+app.get("*", function (req, res) {
+  res.sendFile(_path2.default.resolve("public/index.html"));
 });
 
 app.listen(3000, () => {
   console.info("listening...");
 });
-/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ }),
 /* 3 */
@@ -335,6 +339,12 @@ module.exports = {"modelId":520,"review":"The Mazda MX-5 is a traditional two-se
 /***/ (function(module, exports) {
 
 module.exports = require("cors");
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
 
 /***/ })
 /******/ ]);
