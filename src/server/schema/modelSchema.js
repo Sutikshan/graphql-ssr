@@ -34,8 +34,7 @@ const models = {
 
       return modelData.filter(condition).map(modelListFields);
     }
-
-    return modelData.map(modelListFields);
+    return [];
   }
 };
 
