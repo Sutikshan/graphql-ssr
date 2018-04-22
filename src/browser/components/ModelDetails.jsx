@@ -7,15 +7,19 @@ import { Link } from "react-router-dom";
 function ModelDetails({ data }) {
   let { model, loading } = data;
   if (loading) {
-    model = {};
+    model = {
+      price: 0
+    };
   }
 
   return (
     <div>
-      <h1>Car Details {model.name}</h1>
+      <h1>{model.name}</h1>
       <div className="detail-page">
         <img className="car-image" alt="loading..." src={model.imageUrl} />
-        <div className="review-text">{model.price}</div>
+        <div className="review-text">
+          Price: ${model.price.toLocaleString()}
+        </div>
         <Link to="/search">
           <button className="search-button">Back to Search</button>
         </Link>

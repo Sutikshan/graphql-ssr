@@ -27369,7 +27369,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function ModelDetails({ data }) {
   let { model, loading } = data;
   if (loading) {
-    model = {};
+    model = {
+      price: 0
+    };
   }
 
   return _react2.default.createElement(
@@ -27378,7 +27380,6 @@ function ModelDetails({ data }) {
     _react2.default.createElement(
       "h1",
       null,
-      "Car Details ",
       model.name
     ),
     _react2.default.createElement(
@@ -27388,7 +27389,8 @@ function ModelDetails({ data }) {
       _react2.default.createElement(
         "div",
         { className: "review-text" },
-        model.price
+        "Price: $",
+        model.price.toLocaleString()
       ),
       _react2.default.createElement(
         _reactRouterDom.Link,
