@@ -1,4 +1,4 @@
-import { filter, map, find } from "../data/models.json";
+import modelData from "../data/models.json";
 import {
   GraphQLObjectType,
   GraphQLList,
@@ -32,16 +32,16 @@ const models = {
     if (args.makeId) {
       const condition = model => model.makeId === args.makeId;
 
-      return filter(condition).map(modelListFields);
+      return modelData.filter(condition).map(modelListFields);
     }
 
-    return map(modelListFields);
+    return modelData.map(modelListFields);
   }
 };
 
 const modelResolver = args => {
   if (args.id) {
-    return find(model => model.id === args.id);
+    return modelData.find(model => model.id === args.id);
   }
 
   throw new Error("id is mandatory argument to access a specfic model");

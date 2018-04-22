@@ -1,20 +1,20 @@
 import carOfTheWeekData, { modelId } from "../data/carOfTheWeek.json";
 import { GraphQLObjectType, GraphQLString } from "graphql";
-import { modelFields, modelResolver } from "./modelSchema";
+import modelSchema from "./modelSchema";
 
 const ModelReviewsType = new GraphQLObjectType({
   name: "ModelReviewsType",
   description: "Review of the Car Models",
   fields: () => ({
     review: { type: GraphQLString },
-    ...modelFields
+    ...modelSchema.modelFields
   })
 });
 
 const carOfTheWeek = {
   type: ModelReviewsType,
   resolve: () => {
-    const modelData = modelResolver({
+    const modelData = modelSchema.modelResolver({
       id: modelId
     });
     return { ...carOfTheWeekData, ...modelData };

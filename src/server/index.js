@@ -27,6 +27,7 @@ app.get("*", async (req, res) => {
     <html>
       <head>
         <title>Car Catalog</title>
+        <link rel="stylesheet" href="styles.css">
         <script src='/bundle.js' defer></script>
         <script>window.__INITIAL_DATA__=${serialize(carOfTheWeekData)}</script>
       </head>

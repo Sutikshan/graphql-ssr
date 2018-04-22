@@ -7705,7 +7705,17 @@ class App extends _react.Component {
     return _react2.default.createElement(
       "div",
       null,
-      this.props.carOfTheWeek.review
+      _react2.default.createElement(
+        "h1",
+        null,
+        "Car of the Week"
+      ),
+      _react2.default.createElement("img", { className: "car-image", src: this.props.carOfTheWeek.imageUrl }),
+      _react2.default.createElement(
+        "div",
+        { className: "review-text" },
+        this.props.carOfTheWeek.review
+      )
     );
   }
 }
