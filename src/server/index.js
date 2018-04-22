@@ -1,38 +1,43 @@
-const express = require('express');
-const graphqlHttp = require('express-graphql');
-const schema = require('./schema');
-const cors = require("cors");
-const { renderToString }  = require("react-dom/server");
-const App = require('../shared/App.jsx'); //eslint-disable-line
+import express from "express";
+import graphqlHttp from "express-graphql";
+import schema from "./schema";
+import cors from "cors";
+import React from "react";
+import { renderToString } from "react-dom/server";
+import serialize from "serialize-javascript";
+import App from "../shared/App";
+import carOfTheWeekSchema from "./schema/modelReviewsSchema";
 
 const app = express();
-app.use(cors())
-app.use('/graphql', graphqlHttp({
-  schema,
-  graphiql: true,
-}));
-app.use(express.static("public"))
-
-app.get("*", (req, res) => {
-  const markup = renderToString(
-    <App />
-  )
+app.use(cors());
+app.use(
+  "/graphql",
+  graphqlHttp({
+    schema,
+    graphiql: true
+  })
+);
+app.use(express.static("public"));
+app.get("*", async (req, res) => {
+  const carOfTheWeekData = carOfTheWeekSchema.carOfTheWeek.resolve();
+  const markup = renderToString(<App carOfTheWeek={carOfTheWeekData} />);
 
   res.send(`
     <!DOCTYPE html>
     <html>
       <head>
-        <title>SSR with RR</title>
-        <script src='/bundle.js'></script>
+        <title>Car Catalog</title>
+        <script src='/bundle.js' defer></script>
+        <script>window.__INITIAL_DATA__=${serialize(carOfTheWeekData)}</script>
       </head>
 
       <body>
         <div id="app">${markup}</div>
       </body>
     </html>
-  `)
+  `);
 });
 
-app.listen(4000, () => {
-  console.info('listening...');
+app.listen(3000, () => {
+  console.info("listening...");
 });

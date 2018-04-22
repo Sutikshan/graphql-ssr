@@ -1,24 +1,24 @@
-const {
+import {
   GraphQLObjectType,
   GraphQLList,
   GraphQLInt,
-  GraphQLString,
-} = require('graphql');
+  GraphQLString
+} from "graphql";
 
-const makesData = require('../data/makes.json');
+import makesData from "../data/makes.json";
 
 const MakeType = new GraphQLObjectType({
-  name: 'MakeType',
-  description: 'Car Make',
+  name: "MakeType",
+  description: "Car Make",
   fields: () => ({
     id: { type: GraphQLInt },
-    name: { type: GraphQLString },
+    name: { type: GraphQLString }
   })
 });
 
 const makes = {
   type: GraphQLList(MakeType),
-  resolve: () => makesData,
+  resolve: () => makesData
 };
 
-module.exports = { makes };
+export default { makes };

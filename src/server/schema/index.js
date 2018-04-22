@@ -1,15 +1,12 @@
-const makeSchema = require('./makeSchema');
-const modelSchema = require('./modelSchema');
-const modelReviewsSchema = require('./modelReviewsSchema');
-const {
-  GraphQLSchema,
-  GraphQLObjectType,
-} = require('graphql');
+import makeSchema from "./makeSchema";
+import modelSchema from "./modelSchema";
+import modelReviewsSchema from "./modelReviewsSchema";
+import { GraphQLSchema, GraphQLObjectType } from "graphql";
 
-module.exports = new GraphQLSchema({
+export default new GraphQLSchema({
   query: new GraphQLObjectType({
-    name: 'Query',
-    description: 'Schema for Car Browser',
+    name: "Query",
+    description: "Schema for Car Browser",
     fields: () => ({
       models: modelSchema.models,
       makes: makeSchema.makes,

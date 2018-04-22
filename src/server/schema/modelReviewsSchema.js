@@ -1,22 +1,24 @@
-const carOfTheWeekData = require('../data/carOfTheWeek.json');
-const {
-  GraphQLObjectType,
-  GraphQLInt,
-  GraphQLString,
-} = require('graphql');
+import carOfTheWeekData, { modelId } from "../data/carOfTheWeek.json";
+import { GraphQLObjectType, GraphQLString } from "graphql";
+import { modelFields, modelResolver } from "./modelSchema";
 
 const ModelReviewsType = new GraphQLObjectType({
-  name: 'ModelReviewsType',
-  description: 'Review of the Car Models',
+  name: "ModelReviewsType",
+  description: "Review of the Car Models",
   fields: () => ({
-    modelId: { type: GraphQLInt },
     review: { type: GraphQLString },
+    ...modelFields
   })
 });
 
 const carOfTheWeek = {
   type: ModelReviewsType,
-  resolve: () => carOfTheWeekData,
-}
+  resolve: () => {
+    const modelData = modelResolver({
+      id: modelId
+    });
+    return { ...carOfTheWeekData, ...modelData };
+  }
+};
 
-module.exports = { carOfTheWeek }
+export default { carOfTheWeek };

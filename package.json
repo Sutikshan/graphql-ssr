@@ -1,24 +1,19 @@
 {
   "name": "graphql-ssr",
   "version": "1.0.0",
-  "description": "Sample Implementation GraphQL, Server Side Rendering in React+NodeJS",
+  "description":
+    "Sample Implementation GraphQL, Server Side Rendering in React+NodeJS",
   "main": "index.js",
   "scripts": {
     "start": "webpack -w & nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "relay": "relay-compiler --src ./src/browser --schema .//schema.graphql"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sutikshan/graphql-ssr.git"
   },
-  "keywords": [
-    "graphql",
-    "ssr",
-    "relay-modern",
-    "nodejs",
-    "react",
-    "redux"
-  ],
+  "keywords": ["graphql", "ssr", "relay-modern", "nodejs", "react", "redux"],
   "author": "Anand Dubey",
   "license": "MIT",
   "bugs": {
@@ -26,9 +21,7 @@
   },
   "homepage": "https://github.com/Sutikshan/graphql-ssr#readme",
   "eslintConfig": {
-    "extends": [
-      "eslint:recommended"
-    ],
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
     "rules": {
       "no-console": 0
     },
@@ -41,37 +34,50 @@
     },
     "env": {
       "es6": true,
-      "node": true
+      "node": true,
+      "browser": true
     }
   },
   "babel": {
     "presets": [
-      "env",
+      [
+        "env",
+        {
+          "targets": {
+            "node": "current"
+          }
+        }
+      ],
       "react"
     ],
-    "plugins": [
-      "transform-object-rest-spread"
-    ]
+    "plugins": ["relay", "transform-object-rest-spread"]
   },
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.16.3",
     "express-graphql": "^0.6.12",
-    "graphql": "^0.13.2",
-    "cors": "^2.8.4",
     "isomorphic-fetch": "^2.2.1",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-relay": "^1.5.0",
     "react-router-dom": "^4.2.2",
-    "serialize-javascript": "^1.4.0"
+    "serialize-javascript": "^1.5.0"
   },
   "devDependencies": {
-    "eslint": "^4.19.1",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
+    "babel-plugin-relay": "^1.5.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0",
+    "graphql": "^0.13.2",
     "nodemon": "^1.12.5",
+    "relay-compiler": "^1.5.0",
+    "watchman": "^1.0.0",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
   }
