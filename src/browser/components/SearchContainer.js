@@ -33,15 +33,20 @@ class SearchContainer extends Component {
             makeId={this.state.makeId}
             modelId={this.state.modelId}
           />
-          {this.state.modelId ? (
-            <Link to={`/make/model/${this.state.modelId}`}>
-              <button className="search-button">Details</button>
+          <div className="button-group">
+            {this.state.modelId ? (
+              <Link to={`/make/model/${this.state.modelId}`}>
+                <button className="search-button">Details</button>
+              </Link>
+            ) : (
+              <button disabled className="search-button disabled">
+                Details
+              </button>
+            )}
+            <Link to={`/`}>
+              <button className="search-button">Home</button>
             </Link>
-          ) : (
-            <button disabled className="search-button disabled">
-              Details
-            </button>
-          )}
+          </div>
         </div>
       </div>
     );

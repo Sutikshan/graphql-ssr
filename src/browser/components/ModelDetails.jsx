@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "react-apollo";
-import gql from "graphql-tag";
 import { Link } from "react-router-dom";
+import { getModelById } from "./queries";
 
 function ModelDetails({ data }) {
   let { model, loading } = data;
@@ -29,28 +29,21 @@ function ModelDetails({ data }) {
 }
 
 ModelDetails.propTypes = {
-  data: PropTypes.object
+  data: PropTypes.shape({
+    models: PropTypes.shape({
+      price: PropTypes.number,
+      name: PropTypes.string,
+      imageUrl: PropTypes.string
+    })
+  })
 };
 
-const ModelDetailsWithQuery = graphql(
-  gql`
-    query SearchQuery($modelId: Int!) {
-      model(id: $modelId) {
-        id
-        makeId
-        name
-        price
-        imageUrl
-      }
+const ModelDetailsWithQuery = graphql(getModelById, {
+  options: ({ match }) => ({
+    variables: {
+      modelId: match.params.modelId
     }
-  `,
-  {
-    options: ({ match }) => ({
-      variables: {
-        modelId: match.params.modelId
-      }
-    })
-  }
-)(ModelDetails);
+  })
+})(ModelDetails);
 
 export default ModelDetailsWithQuery;

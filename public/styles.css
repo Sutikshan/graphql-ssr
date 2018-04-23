@@ -6,7 +6,8 @@ body {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   line-height: 1.5;
   padding: 0em 1em 4em 1em;
-  color: #555;
+  background-color: black;
+  color: white;
 }
 h4 {
   color: #333;
@@ -21,8 +22,9 @@ h4 {
 
 .car-image {
   margin-top: 2em;
-  height: 400px;
-  width: 600px;
+  max-height: 400px;
+  max-width: 600px;
+  border: 1px solid #000;
 }
 
 .review-text {
@@ -53,6 +55,12 @@ h4 {
   pointer-events: none;
   cursor: not-allowed;
   background-color: silver;
+}
+
+.button-group {
+  display: flex;
+  width: 25em;
+  justify-content: space-between;
 }
 
 select {

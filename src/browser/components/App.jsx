@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql } from "react-apollo";
 import { Link } from "react-router-dom";
-import gql from "graphql-tag";
+import { carOfTheWeekQuery } from "./queries";
 
-function App(graphqlResponse) {
+export function App(graphqlResponse) {
   let { carOfTheWeek, loading } = graphqlResponse.data;
 
   if (loading) {
@@ -31,15 +31,4 @@ function App(graphqlResponse) {
   );
 }
 
-export default graphql(
-  gql`
-    query AppQuery {
-      carOfTheWeek {
-        id
-        name
-        imageUrl
-        review
-      }
-    }
-  `
-)(App);
+export default graphql(carOfTheWeekQuery)(App);

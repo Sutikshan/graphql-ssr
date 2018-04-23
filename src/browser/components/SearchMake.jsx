@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { graphql } from "react-apollo";
-import gql from "graphql-tag";
+import { makeQuery } from "./queries";
 
-function SearchMake({ data, onMakeSelect, makeId }) {
+export function SearchMake({ data, onMakeSelect, makeId }) {
   let { makes, loading } = data;
   if (loading) {
     makes = [];
@@ -26,18 +26,16 @@ function SearchMake({ data, onMakeSelect, makeId }) {
 }
 
 SearchMake.propTypes = {
-  data: PropTypes.object,
+  data: PropTypes.shape({
+    makes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string
+      })
+    )
+  }),
   onMakeSelect: PropTypes.func.isRequired,
   makeId: PropTypes.number
 };
 
-export default graphql(
-  gql`
-    query SearchQuery {
-      makes {
-        id
-        name
-      }
-    }
-  `
-)(SearchMake);
+export default graphql(makeQuery)(SearchMake);
